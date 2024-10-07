@@ -5,19 +5,19 @@ import time
 class OBSController:
     def __init__(self):
         # OBS WebSocket Client
-        self.SCENE1 = "SCENE1"  # Example scene name
-        self.SourceName = "SOURCE1"  # Example source name
+        self.SCENE1 = "Fullscreen View"
+        self.SourceName = "Camera"  # Example source name
         self.client = obs.ReqClient(host='localhost', port=4444, password='password')
 
-    # Method to fetch all scenes and their scene item IDs
-    def get_scenes(self):
-        scenes = self.client.get_scene_list()  # Retrieve all scenes
-        for scene in scenes.scenes:
-            print(f"Scene Name: {scene['sceneName']}, Scene Index: {scene['sceneIndex']}")
+    # # Method to fetch all scenes and their scene item IDs
+    # def get_scenes(self):
+    #     scenes = self.client.get_scene_list()  # Retrieve all scenes
+    #     for scene in scenes.scenes:
+    #         print(f"Scene Name: {scene['sceneName']}, Scene Index: {scene['sceneIndex']}")
 
     # OBS control methods
     def obs_controller_original(self):
-        print("Entered here")
+        # print("Entered here")
         # Get scene item ID
         x1 = self.client.get_scene_item_id(self.SCENE1, self.SourceName)
         scene_id1 = x1.scene_item_id
@@ -45,11 +45,11 @@ class OBSController:
 # Instantiate and start the OBSController
 if __name__ == "__main__":
     controller = OBSController()
-    # Print all scene UUIDs
-    controller.get_scenes()  # Fetch scene list and UUIDs
+    # # Print all scene UUIDs
+    # controller.get_scenes()  # Fetch scene list and UUIDs
 
     # Schedule the task to run every 1 minute
-    schedule.every(2).seconds.do(controller.obs_controller_original)
+    schedule.every(1).hour.do(controller.obs_controller_original)
     
     while True:
         # Run pending tasks
